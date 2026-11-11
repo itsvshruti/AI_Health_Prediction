@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Patient Details</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Edit Patient Details</h1>
+            <p>Update Patient Blood Test Information</p>
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <section class="form-section">
+
+            <form
+                action="{{ url_for('edit_patient', patient_id=patient.id) }}"
+                method="POST">
+
+                <label for="full_name">Full Name</label>
+                <input
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    value="{{ patient.full_name }}"
+                    required
+                >
+
+                <label for="dob">Date of Birth (dd/mm/yyyy)</label>
+                <input
+                    type="text"
+                    id="dob"
+                    name="dob"
+                    value="{{ patient.dob }}"
+                    placeholder="28/01/2000"
+                    required
+                >
+
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ patient.email }}"
+                    required
+                >
+
+                <label for="glucose">Glucose</label>
+                <input
+                    type="number"
+                    id="glucose"
+                    name="glucose"
+                    step="any"
+                    min="0"
+                    value="{{ patient.glucose }}"
+                    required
+                >
+
+                <label for="haemoglobin">Haemoglobin</label>
+                <input
+                    type="number"
+                    id="haemoglobin"
+                    name="haemoglobin"
+                    step="any"
+                    min="0"
+                    value="{{ patient.haemoglobin }}"
+                    required
+                >
+
+                <label for="cholesterol">Cholesterol</label>
+                <input
+                    type="number"
+                    id="cholesterol"
+                    name="cholesterol"
+                    step="any"
+                    min="0"
+                    value="{{ patient.cholesterol }}"
+                    required
+                >
+
+                <button type="submit">Update Patient</button>
+
+                <a href="{{ url_for('home') }}" class="back-btn">
+                    Back to Patient Records
+                </a>
+
+            </form>
+
+        </section>
+
+        <footer>
+            <p>AI Health Prediction Application | Python Flask Project</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
